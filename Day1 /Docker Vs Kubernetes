@@ -1,0 +1,13 @@
+**Docker
+Definition: Docker is a platform for building, packaging, and running containers. It simplifies application deployment by encapsulating them in containers.
+Shown on the left:
+A single host running multiple containers using the Docker Engine.
+Containers are lightweight, isolated environments for running applications.
+Best suited for local development, CI/CD, or simple containerized environments.
+# Kubernetes
+Definition: Kubernetes is a container orchestration platform for managing, scaling, and deploying containerized applications in distributed environments.
+Shown on the right:
+A Master Node manages the cluster (with API Server, Scheduler, etcd, and Controller Manager).
+Multiple Worker Nodes run containers within Pods.
+Features include auto-scaling, self-healing, and advanced networking.
+Suitable for production-level deployments across multiple nodes.
