@@ -1,0 +1,56 @@
+Key Components of Kubernetes Architecture
+Master Node (Control Plane): The master node is responsible for managing the Kubernetes cluster. It handles the control and orchestration tasks.
+
+API Server:
+
+Acts as the front-end for the Kubernetes cluster.
+All communication (via kubectl, REST API) goes through the API Server.
+Example: You send a kubectl create deployment command, and the API Server processes it.
+Controller Manager:
+
+Ensures the desired state of the cluster is maintained by running controller loops.
+Includes:
+Node Controller: Monitors node health.
+Replication Controller: Ensures the right number of pod replicas.
+Endpoint Controller: Updates endpoint objects.
+Scheduler:
+
+Assigns pods to suitable nodes based on resource requirements, affinity rules, and other constraints.
+Example: A pod requiring 2 CPUs and 4GB of RAM is placed on a node that meets these criteria.
+etcd (Cluster Store):
+
+A distributed key-value store that stores all cluster data (state, configurations).
+Example: Pod definitions, node information, and secrets are stored here.
+Worker Nodes (Data Plane): Worker nodes are where the actual workloads (pods) run. Each worker node has the following components:
+
+Kubelet:
+
+An agent running on each worker node.
+Ensures the containers in the pods are running as expected.
+Communicates with the API Server.
+Kube Proxy:
+
+Manages networking for pods.
+Forwards traffic to the appropriate pod/service.
+Implements network policies.
+Container Runtime:
+
+The software that runs the containers (e.g., Docker, CRI-O, containerd).
+Example: When you deploy a pod, the container runtime pulls the image and starts the container.
+Add-ons: Optional components that enhance the cluster functionality:
+DNS (CoreDNS): Provides DNS names for services and pods.
+Ingress Controller: Manages external HTTP/HTTPS access to the cluster.
+Metrics Server: Collects resource metrics for auto-scaling.
+Logging/Monitoring Tools: E.g., Prometheus, Grafana.
+High-Level Workflow
+You submit a YAML file (kubectl apply -f pod.yaml) to create a resource.
+The API Server validates the request and stores the configuration in etcd.
+The Scheduler decides on which worker node the pod should run.
+The Kubelet on the assigned node ensures the pod is running using the container runtime.
+Kube Proxy manages networking so the pod can communicate with others or external services.
+Example
+Suppose you deploy a web application on Kubernetes:
+
+A Deployment is created to manage pods running your application.
+A Service exposes the deployment to external users.
+If demand increases, the Horizontal Pod Autoscaler scales up the pods automatically.
